@@ -6,7 +6,22 @@ const Movie = require('../models/Movie');
 
 //GET All Movies
 router.get('/', (req, res, next) => {
-  const promise = Movie.find( { });
+  const promise = Movie.aggregate([
+    {
+      $lookup: {
+        from: 'directors', //hangi collection?
+        localField: 'director_id', //hangi alanla eşleştireceksin?
+        foreignField: '_id', //movies collectionunda hangisi ile eşleşecek?
+        as:'director' //hangi değişkene atanacak?
+      }
+    }, 
+    {
+      $unwind: 
+        {
+          path: '$director',
+        }
+    },
+  ]);
 
   promise.then((data) => {
     res.json(data);
@@ -18,7 +33,22 @@ router.get('/', (req, res, next) => {
 //GET Top 10 Movies
 router.get('/top10', (req, res, next) => {
   //const promise = Movie.find( { }).limit(10).sort({ imdb_score: 1 }); //büyükten küçüğe sıralar.
-  const promise = Movie.find( { }).limit(10).sort({ imdb_score: -1 }); //küçükten büyüğe sıralar.
+  const promise = Movie.aggregate([
+    {
+      $lookup: {
+        from: 'directors', //hangi collection?
+        localField: 'director_id', //hangi alanla eşleştireceksin?
+        foreignField: '_id', //movies collectionunda hangisi ile eşleşecek?
+        as:'director' //hangi değişkene atanacak?
+      }
+    }, 
+    {
+      $unwind: 
+        {
+          path: '$director',
+        }
+    },
+  ]).limit(10).sort({ imdb_score: -1 }); //küçükten büyüğe sıralar.
 
   promise.then((data) => {
     res.json(data);
@@ -87,7 +117,7 @@ router.post('/', (req, res, next) => {
   const promise = movie.save();
 
   promise.then((data) => {
-    res.json({ status: 1});
+    res.json(data);
   }).catch((err) => {
     res.json(err);
   });

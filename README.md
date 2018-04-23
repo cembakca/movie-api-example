@@ -35,6 +35,7 @@ Movie API Example  with NodeJS and MongoDB
 
 # Hata Kodları
 Alınan hatalardaki kodlar (Http Status vb. hariç)
-| Code | Description	 |
-| --- | --- |
-| 10 | The movie was not found. |
+|  Error Code 	|  Description 	|
+|---	|---	|
+| 10 	| The movie was not found.   	|
+| 11 	| The director was not found.   	|
