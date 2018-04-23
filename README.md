@@ -31,3 +31,10 @@ Movie API Example  with NodeJS and MongoDB
 | --- | --- | --- | --- |
 | /register | `POST` | { username: 'foo', password:'1234' } | Create a new user. |
 | /authenticate | `POST` | { username: 'foo', password:'1234' } | Generate a token. |
+
+
+# Hata Kodları
+Alınan hatalardaki kodlar (Http Status vb. hariç)
+| Code | Description	 |
+| --- | --- |
+| 10 | The movie was not found. |
