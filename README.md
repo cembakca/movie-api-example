@@ -34,5 +34,9 @@ Alınan hatalardaki kodlar (Http Status vb. hariç)
 |---|---|
 | 10   | The movie was not found.   |
 | 11   | The director was not found.   |
+| 20   | Authentication failed, user not found.   |
+| 21   | Authentication failed, wrong password.   |
+| 22   | No token provided.  |
+| 23   | Failed to authenticate token  |
 
 
