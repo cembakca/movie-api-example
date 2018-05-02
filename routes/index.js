@@ -33,6 +33,10 @@ router.post('/register', (req, res, next) => {
   });
 });
 
+router.get('/authenticate', (req, res, next) => {
+  res.render('form');
+});
+
 router.post('/authenticate', (req, res) => {
   const { username, password } = req.body;
 
@@ -63,10 +67,11 @@ router.post('/authenticate', (req, res) => {
           const token = jwt.sign(payload, req.app.get('api_secret_key'),{
             expiresIn: 720 //token süresi verir (720 dakika: 12 saat)
           });
-          res.json({
-            status: false,
-            token
-          })
+          // res.json({
+          //   status: false,
+          //   token
+          // })
+          res.redirect(`/api/movies/?token=${token}`)
         }
       });
     }
